@@ -1,0 +1,1 @@
+let topper=document.getElementById("header1");topper.style.color="black",console.log("Skrutte rocks!"),console.log("What a wonderful day!");
