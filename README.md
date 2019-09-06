@@ -5,6 +5,10 @@
 ## Description
 > This is a web page
 
+### Colors
+> coolors.co
+#C5EDAC #597081 #6C0E23
+
 ## Techniques
 | Technique | Module | Version |
 | --------- |:------:| --------|
