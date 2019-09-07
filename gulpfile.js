@@ -74,9 +74,10 @@ function watchFiles() {
     })
     gulp.watch('src/scss/**/*.scss', concatCss)
     gulp.watch('src/js/**/*.js', concatJs)
-    gulp.watch('src/**/*.html').on('change', browserSync.reload)
+    gulp.watch('src/**/*.html', copyHtml)
+    gulp.watch('src/scss/**/*.scss').on('change', browserSync.reload)
     gulp.watch('src/js/**/*.js').on('change', browserSync.reload)
-    gulp.watch("src/*.html").on('change', browserSync.reload);
+    gulp.watch('src/**/*.html').on('change', browserSync.reload);
 }
 
 // Export the function to be used in terminal
