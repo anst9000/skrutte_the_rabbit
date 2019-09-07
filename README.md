@@ -13,7 +13,7 @@
 | Technique | Module | Version |
 | --------- |:------:| --------|
 | JS | CSS | 1.0.0 |
-| JS | CSS | 1.0.0 |
+| JS | ABC | 1.2.3 |
 | JS | CSS | 1.0.0 |
 | JS | CSS | 1.0.0 |
 
