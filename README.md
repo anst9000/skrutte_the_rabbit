@@ -7,7 +7,9 @@
 
 ### Colors
 > coolors.co
-#C5EDAC #597081 #6C0E23
+- ![#C5EDAC](https://placehold.it/15/C5EDAC/000000?text=+) `#C5EDAC`
+- ![#597081](https://placehold.it/15/597081/000000?text=+) `#597081`
+- ![#6C0E23](https://placehold.it/15/6C0E23/000000?text=+) `#6C0E23`
 
 ## Techniques
 | Technique | Module | Version |

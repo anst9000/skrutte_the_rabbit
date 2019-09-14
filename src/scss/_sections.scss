@@ -51,32 +51,15 @@ section {
     }
 }
 #food {
-    @include themeColors($light-theme: true);
-
-    .part-info {
-        @include gridSetup(4fr, 5fr);
-        @include gridPicture;
-        @include partInfo(1rem, 3rem, 1rem, 1rem);
-    }
-
+    @extend #about;
 }
+
 #language {
-    @include themeColors($light-theme: false);
-
-    .part-info {
-        @include gridSetup(5fr, 4fr);
-        @include gridText;
-        @include partInfo(1rem, 1rem, 1rem, 3rem);
-    }
+    @extend #interests;
 }
-#family {
-    @include themeColors($light-theme: true);
 
-    .part-info {
-        @include gridSetup(4fr, 5fr);
-        @include gridPicture;
-        @include partInfo(1rem, 3rem, 1rem, 1rem);
-    }
+#family {
+    @extend #about;
 }
 
 @include mq(1075px) {
