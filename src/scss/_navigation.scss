@@ -1,27 +1,38 @@
+// This is the nav-partial for web page
+
 // NAVIGATION BAR
 // =================
 .container {
 	width: 80%;
-	margin: 0 auto;
+    margin: 0 auto;
+    
+    // h1 {
+    //     text-transform: uppercase;
+    // }
 }
 
 header {
-  background: $colorNavBg;
-  color: $colorNavLink;
+    // Setting the dark grey main color to background 
+    // and whiteish color to font.
+    background: $colorNavBg;
+    color: $colorNavLink;
 }
 
+// Using pseudo element to create the bar above links when hover.
 header::after {
-  content: '';
-  display: table;
-  clear: both;
+    content: '';
+    display: table;
+    clear: both;
 }
 
 .logo {
     float: left;
     padding: 10px 0;
     font-size: 2.5rem;
+    text-transform: uppercase;
 }
 
+// Nav section for all links and their appearance
 nav {
   float: right;
 
@@ -49,6 +60,7 @@ nav {
         color: $colorNavLinkHover;
     }
 
+    // Hover effect with bar using transition
     a::before {
         content: '';
         display: block;
@@ -65,6 +77,10 @@ nav {
     }
 }
 
+// Media queries using @mixin mq
+// They are set when the width on page
+// needs a change, instead of trying to
+// find the 'proper' widths of some devices.
 @include mq(1075px) {
     .container {
         display: grid;
@@ -167,10 +183,7 @@ nav {
 
 }
 
-
-
-
-// Go back to top button
+// Go back to 'top' button
 #myBtn {
     display: none;
     position: fixed;
