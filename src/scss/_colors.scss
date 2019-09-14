@@ -1,0 +1,23 @@
+
+$color1: #597081;
+$color2: #C5EDAC;
+$color3: #6C0E23;
+
+$colorNavBg: $color1;
+$colorNavLink: #ddd;
+$colorNavLinkHover: darken($colorNavLink, 25%);
+
+$colorMenuBg: #333;
+$border: #111;
+
+$colorFooterBg: $color1;
+
+$headerDark: complement($color3);
+$headerLight: complement($color2);
+$fontDark: #333;
+$fontLight: #bbb;
+
+$light-background: $color2;
+$light-text: $fontDark;
+$dark-background: $color3;
+$dark-text: $fontLight;

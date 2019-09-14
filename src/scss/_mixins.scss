@@ -1,0 +1,74 @@
+@mixin gridSetup($pic, $txt) {
+    display: grid;
+    justify-items: center;
+    justify-content: space-between;	
+    align-items: center;
+    grid-template-columns: $pic $txt;
+    grid-template-rows: 1fr 50% 1fr;
+}
+
+@mixin gridPicture {
+    grid-template-areas:
+        "picture ."
+        "picture text"
+        "picture .";
+}
+
+@mixin gridText {
+    grid-template-areas:
+        ". picture"
+        "text picture"
+        ". picture";
+
+}
+
+@mixin partInfo($up, $ri, $do, $le) {
+    img {
+        grid-area: picture;
+        width: 100%;
+    }
+
+    p {
+        grid-area: text;
+        font-size: 1.4rem;
+        margin: $up $ri $do $le;
+        letter-spacing: 1px;
+        line-height: 1.6;
+    }
+}
+
+@mixin themeColors($light-theme: true) {
+    @if $light-theme {
+        background-color: $light-background;
+        color: $light-text;
+
+        .part-header {
+            color: $headerDark;
+        }
+
+    } @else {
+        background-color: $dark-background;
+        color: $dark-text;
+
+        .part-header {
+            color: $headerLight;
+        }
+    }
+}
+
+@mixin grid($cols, $marg) {
+    float: left;
+    margin-right: $marg;
+    margin-bottom: $marg;
+    width: ((100% - (($cols - 1) * $marg)) / $cols);
+
+    &:nth-child(#{$cols}n) {
+        margin-right: 0;
+    }
+}
+
+@mixin mq($size) {
+    @media only screen and (max-width: $size) {
+        @content;
+    }
+}

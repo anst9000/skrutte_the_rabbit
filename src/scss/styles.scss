@@ -1,166 +1,17 @@
 @import 'reset';
+@import 'fonts';
+@import 'colors';
+@import 'mixins';
+@import 'navigation';
+@import 'sections';
 
-// font-family: 'Raleway', sans-serif;
-// font-family: 'Open Sans', sans-serif;
-
-
-$color: firebrick;
-$colorNav: #597081;
-$colorNavLink: #222;
-$colorNavLinkHover: #999;
-$color2: #C5EDAC;
-$color3: #6C0E23;
-$border: #000;
-
-$colorBlack: #222;
+html {
+	scroll-behavior: smooth;
+    width: 100%;
+}
 
 body {
-    color: $colorBlack;
+    color: $fontDark;
+    margin: 0 auto;
     // background: $color;
-}
-
-
-// NAVIGATION BAR
-// ================================
-.header {
-    height: 100px;
-    background: $colorNav;
-    padding: 0 20px;
-    color: #ffffff;
-}
-
-.logo {
-    line-height: 100px;
-    float: left;
-    text-transform: uppercase;
-}
-
-.menu {
-    float: right;
-    line-height: 100px;
-}
-
-.menu a {
-    color: #ffffff;
-    text-transform: uppercase;
-    text-decoration:  none;
-    padding: 0 10px;
-}
-
-.show-menu-btn,
-.hide-menu-btn {
-    transition: 0.4s;
-    font-size: 30px;
-    cursor: pointer;
-    display: none;
-}
-
-.show-menu-btn {
-    float: right;
-}
-
-.show-menu-btn i {
-    line-height: 100px;
-}
-
-.menu a:hover,
-.show-menu-btn:hover,
-.hide-menu-btn:hover {
-    color: #1498db;
-}
-
-#chk {
-    position: absolute;
-    visibility: hidden;
-    z-index: -10;
-}
-
-.content {
-    padding: 0 0;
-}
-
-.content img {
-    width: 100%;
-    max-width: 500px;
-    margin: 20px 0;
-}
-
-.content p {
-    text-align: justify;
-}
-
-@media screen and (max-width: 800px) {
-    .show-menu-btn,
-    .hide-menu-btn {
-        display: block;
-    }
-
-    .menu {
-        position: fixed;
-        width: 100%;
-        height: 100vh;
-        background: #333333;
-        opacity: 0.9;
-        right: -100%;
-        top: 0;
-        text-align: center;
-        padding: 80px 0;
-        line-height: normal;
-        transition: 0.7s;
-    }
-
-    .menu a {
-        display: block;
-        padding: 20px;
-    }
-
-    .hide-menu-btn {
-        position: absolute;
-        top: 40px;
-        right: 40px;
-    }
-
-    #chk:checked ~ .menu {
-        right: 0;
-    }
-}
-
-.box {
-  width: 300px;
-  border: 5px solid $border;
-  padding: 50px;
-  margin: 20px;
-}
-
-#box1 {
-    background: $colorNav;
-}
-#box2 {
-    background: $color2;
-}
-#box3 {
-    background: $color3;
-}
-
-section {
-  height: 100%;
-  width: 100%;
-  display: flex;
-    flex-direction: column;
-}
-
-#home {
-  background: lightblue;
-}
-#about {
-  background: lightgreen;
-}
-#services {
-  background: purple;
-}
-#works {
-  background: red;
-}
-#contact {
-    background: grey;
 }

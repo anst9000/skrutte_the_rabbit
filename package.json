@@ -19,16 +19,17 @@
   "author": "Anders Stromberg <coltlaboy@yahoo.se>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anst9000/WebbIII-Moment2/issues"
+    "url": "https://github.com/anst9000/skrutte_the_rabbit/issues"
   },
-  "homepage": "https://github.com/anst9000/WebbIII-Moment2#readme",
+  "homepage": "https://github.com/anst9000/skrutte_the_rabbit#readme",
   "devDependencies": {
     "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^6.1.0",
     "gulp-sass": "^4.0.2",
-    "gulp-terser": "^1.2.0"
+    "gulp-uglify-es": "^1.0.4"
   }
 }

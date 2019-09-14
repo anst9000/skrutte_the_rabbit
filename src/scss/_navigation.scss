@@ -1,0 +1,193 @@
+// NAVIGATION BAR
+// =================
+.container {
+	width: 80%;
+	margin: 0 auto;
+}
+
+header {
+  background: $colorNavBg;
+  color: $colorNavLink;
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.logo {
+    float: left;
+    padding: 10px 0;
+    font-size: 2.5rem;
+}
+
+nav {
+  float: right;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        display: inline-block;
+        margin-left: 30px;
+        padding-top: 23px;
+        position: relative;
+    }
+
+    a {
+        color: $colorNavLink;
+        text-decoration: none;
+        font-size: $navLink;
+        letter-spacing: 1px;
+    }
+
+    a:hover {
+        color: $colorNavLinkHover;
+    }
+
+    a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background-color: $colorNavLinkHover;
+        position: absolute;
+        top: 8px;
+        width: 0%;
+        transition: all ease-in-out 150ms;
+    }
+
+    a:hover::before {
+        width: 100%;
+    }
+}
+
+@include mq(1075px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "logo"
+            "list";
+    }
+
+    .logo {
+        grid-area: logo;
+        width: 40%;
+        font-size: 2rem;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    nav {
+        grid-area: list;
+        justify-self: center;
+
+        li {
+            margin-left: 30px;
+            margin-bottom: 10px;
+            padding-top: 15px;
+        }
+
+        a {
+            font-size: $navLink - 0.1rem;
+            letter-spacing: 1px;
+        }
+
+        a::before {
+            height: 4px;
+            top: 6px;
+        }
+
+    }
+}
+
+@include mq(860px) {
+    .container {
+        width: 90%;
+    }
+
+    .logo {
+        width: 30%;
+        font-size: 1.7rem;
+    }
+
+    nav {
+
+        li {
+            margin-left: 15px;
+            margin-bottom: 10px;
+            padding-top: 10px;
+        }
+
+        a {
+            font-size: $navLink - 0.2rem;
+            letter-spacing: 1px;
+        }
+
+        a::before {
+            height: 3px;
+            top: 5px;
+        }
+    }
+}
+
+@include mq(675px) {
+    .container {
+        width: 100%;
+    }
+
+    .logo {
+        width: 25%;
+        font-size: 1.5rem;
+    }
+
+    nav {
+
+        li {
+            margin-left: 10px;
+            margin-bottom: 8px;
+            padding-top: 8px;
+        }
+
+        a {
+            font-size: $navLink - 0.3rem;
+            letter-spacing: 1px;
+        }
+
+        a::before {
+            height: 2px;
+            top: 4px;
+        }
+    }
+
+}
+
+
+
+
+// Go back to top button
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 5;
+    font-size: $navLink;
+    border: none;
+    outline: none;
+    background-color: $color1;
+    color: $colorNavLink;
+    opacity: 0.75;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+#myBtn:hover {
+    background-color: darken($color1, 15%);
+}

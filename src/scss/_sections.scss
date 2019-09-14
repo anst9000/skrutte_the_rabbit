@@ -1,0 +1,209 @@
+// SECTIONS GENERIC
+// ================
+section {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.part-header {
+    font-size: $sectionHeading;
+    margin: 2.5rem auto 0.5rem auto;
+}
+
+.part-info {
+    img {
+        width: 100%;
+        margin: 1.5rem;
+        padding: 1.5rem 1.5rem 3rem 1.5rem;
+    }
+}
+
+.content {
+    width: 100%;
+
+    p {
+        text-align: justify;
+    }
+}
+
+
+// SECTIONS SPECIALIZED
+// ====================
+#about {
+    @include themeColors($light-theme: true);
+
+    .part-info {
+        @include gridSetup(4fr, 5fr);
+        @include gridPicture;
+        @include partInfo(1rem, 3rem, 1rem, 1rem);
+    }
+
+}
+#interests {
+    @include themeColors($light-theme: false);
+
+    .part-info {
+        @include gridSetup(5fr, 4fr);
+        @include gridText;
+        @include partInfo(1rem, 1rem, 1rem, 3rem);
+    }
+}
+#food {
+    @include themeColors($light-theme: true);
+
+    .part-info {
+        @include gridSetup(4fr, 5fr);
+        @include gridPicture;
+        @include partInfo(1rem, 3rem, 1rem, 1rem);
+    }
+
+}
+#language {
+    @include themeColors($light-theme: false);
+
+    .part-info {
+        @include gridSetup(5fr, 4fr);
+        @include gridText;
+        @include partInfo(1rem, 1rem, 1rem, 3rem);
+    }
+}
+#family {
+    @include themeColors($light-theme: true);
+
+    .part-info {
+        @include gridSetup(4fr, 5fr);
+        @include gridPicture;
+        @include partInfo(1rem, 3rem, 1rem, 1rem);
+    }
+}
+
+@include mq(1075px) {
+    .part-header {
+        font-size: $sectionHeading - 0.5rem;
+        margin: 1.5rem auto 0.5rem auto;
+    }
+
+    #about .part-info,
+    #interests .part-info,
+    #food .part-info,
+    #language .part-info,
+    #family .part-info
+    {
+        img {
+            width: 90%;
+        }
+
+        p {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+@include mq(860px) {
+    .part-header {
+        font-size: $sectionHeading - 1.0rem;
+        margin: 1.0rem auto 0 auto;
+    }
+
+    #about .part-info,
+    #interests .part-info,
+    #food .part-info,
+    #language .part-info,
+    #family .part-info
+    {
+        img {
+            width: 80%;
+        }
+
+        p {
+            font-size: 1.0rem;
+        }
+    }
+}
+
+
+// FOOTER
+// ======
+#footer {
+    width: 100%;
+    background: $colorFooterBg;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.box-area {
+    height: 30vh;
+    width: 100vw;
+}
+
+.box {
+    background: $color2;
+    width: 25%;
+    height: 75%;
+    border: 5px solid $border;
+    padding: 10px;
+
+    p {
+        font-size: 1.0rem;
+        line-height: 1.4;
+
+        &:first-of-type {
+            font-weight: 700;
+            text-decoration: underline;
+            padding-bottom: 0.4rem;
+        }
+
+        span {
+            text-shadow: 0.5px 0.5px #FFFF00;
+        }
+    }
+}
+
+@include mq(1075px) {
+    .box-area {
+        height: 30vh;
+        width: 100vw;
+    }
+
+    #box1 {
+        grid-area: box1;
+    }
+    #box2 {
+        grid-area: box2;
+    }
+    #box3 {
+        grid-area: box3;
+    }
+
+    #footer {
+        display: grid;
+        grid-template-columns: repeat(1fr, 3);
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "box1 box3 box2";
+    }
+
+
+    .box {
+        width: 100%;
+        height: 50%;
+        border: 3px solid $border;
+
+        p {
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+    }
+
+}
+
+@include mq(675px) {
+    .box p {
+        font-size: 0.8rem;
+    }
+}
+

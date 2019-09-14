@@ -1,92 +1,90 @@
-// Fetching the necessary modules for Gulp
-const gulp = require('gulp')
-const sass = require('gulp-sass')
-const imagemin = require('gulp-imagemin')
-const terser = require('gulp-terser')
-const cleanCSS = require('gulp-clean-css')
+const { src, dest, watch, series, parallel } = require('gulp')
 const concat = require('gulp-concat')
-const { series, parallel } = require('gulp');
+const uglify = require('gulp-uglify-es').default
+const sass = require('gulp-sass')
+const cleanCSS = require('gulp-clean-css')
+const imagemin = require('gulp-imagemin')
+const del = require('del')
 const browserSync = require('browser-sync').create()
 
-// Logs Message
-function message() {
-    return console.log('Gulp is up and running...')
+const files = {
+    htmlPath: 'src/**/*.html',
+    scssPath: 'src/scss/**/*.scss',
+    jsPath: 'src/js/**/*.js',
+    imgPath: ['src/**/*.{gif,png,jpg,jpeg}'],
+    imgPubPath: 'pub'
 }
 
-// Compile scss into css
-function style() {
-    // Folder for scss files
-    return gulp.src('src/scss/**/*.scss')
-        // Run the files via sass compiler + error checking
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('pub/css'))     // Store the css file
-        .pipe(browserSync.stream())     // Make sure changes shows in browsers
-}
+const imgTask = series(imgClean, imgMinify)
 
-// Copy all html files from src/ to pub/
-function copyHtml() {
-    return gulp.src('src/*.html')
-        .pipe(gulp.dest('pub'))         // Save a copy of html-files to pub-folder
+// Clean images
+function imgClean() {
+    return del(files.imgPubPath);
 }
 
 // Minifying images by imagemin
-function imageMin() {
-    return gulp.src('src/img/*')
-        .pipe(imagemin())               // gulp-method imageMin
-        .pipe(gulp.dest('pub/img'))     // place images in img-folder
+function imgMinify() {
+    // return src('src/img/*')
+    return src(files.imgPath)
+        .pipe(imagemin([
+            imagemin.gifsicle({ interlaced: true }),
+            imagemin.jpegtran({ progressive: true }),
+            imagemin.optipng({ optimizationLevel: 5 }),
+            imagemin.svgo({
+                plugins: [
+                    { removeViewBox: true },
+                    { cleanupIDs: false }
+                ]
+            })
+        ], {
+            verbose: true
+        }))
+        .pipe(dest(files.imgPubPath))  // place images in img-folder
 }
 
-// Minify JS files
-function minify() {
-    return gulp.src('src/js/**/*.js')
-        .pipe(terser())                 // Removes white spaces fm files
-        .pipe(gulp.dest('pub/js'))
+
+// Task: copy HTML
+function htmlTask() {
+    return src(files.htmlPath)
+        .pipe(dest('pub'))
+        .pipe(browserSync.stream())
 }
 
-// Concatenate all scss-files into 1 single css-file
-function concatCss() {
-    // Folder for scss files
-    return gulp.src('src/scss/**/*.scss')
-        .pipe(concat('styles.scss'))    // The resultant file
-        // Run the files via sass compiler + error checking
+// Concatenate and minify js-files
+function jsTask() {
+    return src(files.jsPath)
+        .pipe(concat('main.js'))
+        .pipe(uglify())
+        .pipe(dest('pub/js'))
+        .pipe(browserSync.stream())
+}
+
+// Task: Convert scss to css
+function scssTask() {
+    return src(files.scssPath)
         .pipe(sass().on('error', sass.logError))
-        .pipe(cleanCSS())               // Removes white spaces
-        .pipe(gulp.dest('pub/css'))     // Store the css file
+        .pipe(cleanCSS())
+        .pipe(dest('pub/css'))
         .pipe(browserSync.stream())     // Make sure changes shows in browsers
 }
 
-// Concatenate all js-files into 1 single file
-function concatJs() {
-    return gulp.src('src/js/**/*.js')
-        .pipe(concat('index.js'))       // The resultant file
-        .pipe(terser())                 // Removes white spaces
-        .pipe(gulp.dest('pub/js'))      // Place index.js in pub/
-}
 
-const all = parallel(concatCss, concatJs, copyHtml, imageMin, message, watchFiles)
-
-// Sets Gulp to automatically update when any changes are made
-function watchFiles() {
+// Task: Watcher
+function watchTask() {
     browserSync.init({
         server: {
             baseDir: 'pub/'
         }
     })
-    gulp.watch('src/scss/**/*.scss', concatCss)
-    gulp.watch('src/js/**/*.js', concatJs)
-    gulp.watch('src/**/*.html', copyHtml)
-    gulp.watch('src/scss/**/*.scss').on('change', browserSync.reload)
-    gulp.watch('src/js/**/*.js').on('change', browserSync.reload)
-    gulp.watch('src/**/*.html').on('change', browserSync.reload);
+
+    watch(
+        [files.htmlPath, files.jsPath, files.scssPath],
+        parallel(htmlTask, jsTask, scssTask)
+    ).on('change', browserSync.reload)
+    watch(files.imgPath, imgTask).on('change', browserSync.reload)
 }
 
-// Export the function to be used in terminal
-exports.message = message
-exports.style = style
-exports.copyHtml = copyHtml
-exports.imageMin = imageMin
-exports.minify = minify
-exports.concatCss = concatCss
-exports.concatJs = concatJs
-exports.watchFiles = watchFiles
-exports.all = all
+exports.default = series(
+    parallel(htmlTask, jsTask, scssTask, imgTask),
+    watchTask
+)
